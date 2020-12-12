@@ -14,6 +14,7 @@ export default class Server{
     constructor(){
 
         console.log( '# Building server.')
+        console.log( '# Building server2.')
 
         this.app = express()
         this.port = '3000'
@@ -21,13 +22,15 @@ export default class Server{
         this.wa = new WAClient({
 
             // session: (fs.existsSync( SESSION_FILE_PATH )) && JSON.parse( fs.readFileSync( SESSION_FILE_PATH ).toString() ),
-            // restartOnAuthFail: true,
-            // takeoverOnConflict: false,
+            restartOnAuthFail: true,
+            takeoverOnConflict: false,
             puppeteer: {
                 args: [
                     '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage'
                 ],
-                // headless: false,
+                headless: false,
                 // executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
             },            
 
