@@ -33,9 +33,14 @@ export default class Server{
 
         })
 
+        
         this.init()
-
-        this.wa.initialize()
+        
+        console.log('WA INIT')
+        this.wa.initialize().then( x => {
+            // console.log(x.toString())
+            console.log('wa inited')
+        })
 
         this.wa.on( 'qr', ( qr ) => {
 
