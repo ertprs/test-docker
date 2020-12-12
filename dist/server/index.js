@@ -23,7 +23,6 @@ class Server {
                     '--disable-setuid-sandbox',
                     '--disable-dev-shm-usage'
                 ],
-                headless: false,
             },
         });
         this.init();

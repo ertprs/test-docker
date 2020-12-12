@@ -30,7 +30,7 @@ export default class Server{
                     '--disable-setuid-sandbox',
                     '--disable-dev-shm-usage'
                 ],
-                headless: false,
+                // headless: false,
                 // executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
             },            
 
