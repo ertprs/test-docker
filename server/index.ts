@@ -1,5 +1,6 @@
 import express from 'express'
 import http from 'http'
+import WAWebJS, { Client as WAClient } from 'whatsapp-web.js'
 
 export default class Server{
 
@@ -8,6 +9,7 @@ export default class Server{
     public app: express.Application
     private port: string
     private httpServer: http.Server
+    public wa: WAClient
 
     constructor(){
 
@@ -16,8 +18,36 @@ export default class Server{
         this.app = express()
         this.port = '3000'
         this.httpServer = http.createServer( this.app )
+        this.wa = new WAClient({
+
+            // session: (fs.existsSync( SESSION_FILE_PATH )) && JSON.parse( fs.readFileSync( SESSION_FILE_PATH ).toString() ),
+            // restartOnAuthFail: true,
+            // takeoverOnConflict: false,
+            puppeteer: {
+                args: [
+                    '--no-sandbox',
+                ],
+                // headless: false,
+                // executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            },            
+
+        })
 
         this.init()
+
+        this.wa.initialize()
+
+        this.wa.on( 'qr', ( qr ) => {
+
+            // console.log( `[${Date.parse('DD/m/YY')}]`, 'new qr' )
+            console.log('# WA New QR.', /* new Date() */)
+            // this.status = {
+            //     status: 'QR',
+            //     data: qr
+            // }
+            // this.io.emit( 'status', this.status )
+         
+        })
 
     }
 
